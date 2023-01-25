@@ -33,7 +33,6 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - Resolving errors during installation : pip install --upgrade protobuf==3.20.0 로 변경
 
 # :pushpin:Project Process (Training Custom Object Detector)
-----------------------------------------------------------------
 #### :dizzy: 객체 인식 정의
 - 객체 인식 :  이미지나 영상 내에 있는 객체를 식별하는 컴퓨터 비전 기술
 - 객체 인식 = 여러가지 객체에 대한 분류 + 객체의 위치 정보를 파악하는 위치 검출
