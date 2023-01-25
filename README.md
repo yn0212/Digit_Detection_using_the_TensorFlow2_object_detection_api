@@ -135,7 +135,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - regularization_loss(정규화 손실) :  정규화 손실은 신경망 의 가중치 에서 계산된 L2 손실과 같음. 이 손실을 최소화하면 가중치 값이 축소되는 경향이 있습니다. 과적합과 같은 문제를 해결하는 데 도움이 될 수 있는 정규화기술
 - learning_rate: 학습률
 ----------------------------------------------------------------
-##### Resolved during evaluation  :v:
+##### Resolving errors during evaluation  :v:
 ![f3aefbabb5bd36364b57b56dd2e54fd9181ba7dd_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513742-67393059-4f35-4cf9-a4e5-141396f42d41.png)
 - =>해결 : test.record파일 생성
 
@@ -210,3 +210,90 @@ InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 �
 - ==>한 객체의 바운딩 박스가 겹쳤을때(파란 선으로 그은 두 바운딩 박스 좌표 같음) 더 높은 확률의 숫자가 랜덤으로 안보이는 경향이 있음
 - ==>출력 글자를 확인해야하는 번거로움 발생
 - 해결 못함
+------------------------------------------------------------------------------------------------------
+##### Resolving Code Errors  :v:
+
+- vscode matplotlib사용시 imshow 오류
+- ==>해결 : 파일 주석 처리
+![629462bd14cce31fd5d1b3e15d54b4c2b54634e0_re_1673935912240](https://user-images.githubusercontent.com/105347300/214517311-b992530b-e0f3-487d-9217-46543f403f66.png)
+![Uploading 65ebe310a07650b61cee8135c57eda33ffb16903_re_1673935912240.png…]()
+
+
+- 바운딩 박스 글자 크기 조절 문제 해결
+- 바운딩 박스 크기가 너무 커서 다른 바운딩 박스를 가리는 문제점
+- D:\jyn\ncslab\tensorflow\models\research\object_detection\utils
+- 파일 font 크기 수정
+
+![47b9925ae87dd11305cbac7949dce6378a532935_re_1674121259217](https://user-images.githubusercontent.com/105347300/214517401-7ca0c708-5daa-4de7-8f3e-68d66366d10c.png)
+- 기본 24에서 유동성있게 하기위해 이미지 가로 크기에 따른 크기 조절로 변경함. 
+
+![956efa8464fe98ad374a4c91d46d410adaf6f720_re_1674121259217](https://user-images.githubusercontent.com/105347300/214517458-064d2418-26d1-4a72-9bb8-9d2fbb91e146.png)
+
+## :loudspeaker:Code Addition Description
+
+### :bulb: 1)저장된 모델 불러오기 및 검출 기능
+
+![28301ea01da40f2a7cbab1fe0d6ffb0999113001](https://user-images.githubusercontent.com/105347300/214517699-a3d26f5a-ae1d-4d1b-89c4-95ffe6887501.png)
+![0b7a92a1531e22b1a0e584dc34ddf8f7132e2c7e](https://user-images.githubusercontent.com/105347300/214517717-d2bda4f5-b36e-4558-ac08-7be4acd25af4.png)
+![47abfe908c2911fda71d84ff1ac08ebd28b84094](https://user-images.githubusercontent.com/105347300/214517729-be1756da-d1b4-4e5d-b1c0-4d72d8e6ed18.png)
+
+- =>모델을 가져와 데이터를 입력하면(학습한 데이터의 형식이 tensor이므로 입력 형식을 tensor로 바꾸어줌) 추론한 값을 반환함.
+
+-----------------------------------------------------------------------------------------------------
+### :bulb: 2)반환된 detections 의 값 출력
+- ==>'raw_detection_boxes' ,num_detections , 'raw_detection_scores' ,'detection_anchor_indices' , 'detection_boxes' ,'detection_scores' ,'detection_multiclass_scores' 의 정보를 확인 할 수 있음.
+
+![0d71a96e5e0477d35e9bd93609b5b4c02616a72b](https://user-images.githubusercontent.com/105347300/214517910-2d03cb22-9e8d-4201-963d-efcce0e1edd2.png)
+
+- ==>num_detections 의 값만 정수임을 확인 할 수 있음. 100임
+- ==>num_detections 를 제거하여 배열인 값만 남기고  반환된 추론값의 정보들을 딕셔너리로 만든 후 다시 num_detections의 값을 넣어줌
+- ==> 딕셔너리 형태로 추론 값 사용
+![c6f8b4485cc209b05c1953a62c2441b9d60ceb99](https://user-images.githubusercontent.com/105347300/214518008-7d9110cc-1a66-4e32-9370-11803bbfaf32.png)
+
+----------------------------------------------------------------------------------------------
+### :bulb: 3)반환된 추론값의 딕셔너리 key 설명
+
+![ef233e76211fe390c5b04cbf7b4f8032d429b5d9](https://user-images.githubusercontent.com/105347300/214518102-aa91a502-b727-4fe3-87f4-92b0598646ce.png)
+- ==>이미지 추론 정보 출력 가능
+![4ceab178f3ce2b3701a1caa1ce7fe6a9a80ddd10_re_1674143258387](https://user-images.githubusercontent.com/105347300/214518153-97737792-9ad7-480d-b626-780f8824d3d4.png)
+
+![e8026ffe0173a86184aec695f6f94d8c8a29b277](https://user-images.githubusercontent.com/105347300/214518174-2f1ea17e-10ea-4e9d-b947-4fbae4f5004f.png)
+
+-----------------------------------------------------------------------------------------
+### :bulb: 4)검출 결과를 원본 영상에 그리기 (함수 이용)
+
+    viz_utils.visualize_boxes_and_labels_on_image_array(
+
+        image_np_with_detections,# 원본 이미지
+
+        detections['detection_boxes'],# bounding box 좌표
+
+        detections['detection_classes'],  # label 클래스라벨
+
+        detections['detection_scores'],# confidence score 확률
+
+        category_index,# label map # 모델들의 카테고리에 대한 정보
+
+        use_normalized_coordinates=True,# bounding box 좌표 normalized 여부
+
+        max_boxes_to_draw=11, # 이미지 위에 최대 몇 개의 bounding box 그릴 지 설정
+
+        min_score_thresh=.50, # confidence score가 지정한 값 이상인 것만 표시
+
+        agnostic_mode=False, #평가 여부를 제어(객체만 검출)
+
+        line_thickness=1#바운딩 박스 두께 설정
+
+        )
+
+- 함수 파라미터 정보
+![9d594380218ffe05443ec9d5be38e9faef39ea0e_re_1674121259217](https://user-images.githubusercontent.com/105347300/214518982-fc9f94dd-389d-452b-9c52-2e97b8298255.png)
+
+-----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
