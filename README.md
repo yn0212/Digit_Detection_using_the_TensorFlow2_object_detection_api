@@ -33,18 +33,19 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - Resolving errors during installation : pip install --upgrade protobuf==3.20.0 로 변경
 
 # :pushpin:Project Process (Training Custom Object Detector)
+----------------------------------------------------------------
 #### :dizzy: 객체 인식 정의
 - 객체 인식 :  이미지나 영상 내에 있는 객체를 식별하는 컴퓨터 비전 기술
 - 객체 인식 = 여러가지 객체에 대한 분류 + 객체의 위치 정보를 파악하는 위치 검출
 - 딥러닝을 이용한 객체 인식 알고리즘은 1단계 객체 인식과 2단계 객체 인식으로 나눌 수 있음.
 - 1단계 : 분류와 위치검출을 동시에 행하는 방법 =>객체인식 비교적 빠름, 정확도 낮음(yolo,ssd)
 - 2단계 : 분류와 위치검출 순차적으로 행하는 방법 =>객체인식 비교적 느림, 정확도 높음(r-cnn계열)
-
+----------------------------------------------------------------
 ### :loudspeaker: 데이터세트에 주석 달기 
 - LabelImg  사용
 ![76d36c161bc6bfbed6b5216a47a0160afd69ad0c_re_1674143258383](https://user-images.githubusercontent.com/105347300/214510142-cd76c0b2-36d6-487b-816b-2f6cb15cdf91.png)
 - 0~9 까지의 훈련 데이터 객체에 주석을 달아 xml파일 생성
-
+----------------------------------------------------------------
 ### :loudspeaker: Create Label Map (레이블 맵 생성)
 - TensorFlow에는 사용된 각 레이블을 정수 값에 매핑하는 레이블 맵이 필요함.
 - label_map.pbtxt파일 사용
@@ -52,7 +53,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - id는 1부터 시작
 - 0~9 까지 id매칭
 ![edab9ba1d45e19d811502a773e142d77f7339b6e_re_1674143258383](https://user-images.githubusercontent.com/105347300/214510426-c3bf5d05-b577-4b49-ad2e-0250734f5f47.png)
-
+----------------------------------------------------------------
 ### :loudspeaker: TensorFlow 레코드 만들기
 - 주석을 TFRecord형식으로 변환
 - 폴더 의 모든 *.xml파일 을 반복 하고 두 파일 각각에 대한 파일을 생성하는 간단한 스크립트 사용
@@ -71,7 +72,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - test.xml파일 용량이 0KB이면 test.record는 빈 파일임
 - 모델 평가를 하기위해서는 test.xml파일을 만들어야함.
 - 저자는 추후 모델 평가시 test폴더에서 labelimg를 사용하여 xml파일 추가후 test.record파일을 다시 생성해주었음.
-
+----------------------------------------------------------------
 ## :loudspeaker: 사전 학습된 모델 SSD ResNet50 V1 FPN 640x640  다운, 교육 파이이프라인 수정
 - 다운로드 받은 모델 폴더 속의 pipeline.config 파일 수정!
 - [7dd78918967b0f23af4c599a607e76a902b31b96_re_1674143258384](https://user-images.githubusercontent.com/105347300/214511647-1c68d1c4-e770-43b1-b3b6-c648124a3a86.png)
@@ -82,7 +83,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 
 ![a24beca45a892cb1a4f2402342a9c5103f52c7a6_re_1674143258385](https://user-images.githubusercontent.com/105347300/214511741-3423cc78-d25e-41e2-88f0-5777c15db814.png)
 - 파일 경로를 넣어줌 , num_steps 수정가능
-
+----------------------------------------------------------------
 ## :loudspeaker:모델 훈련
 - TensorBoard를 사용하여 교육 작업 진행률 모니터링
 ![31e6f58050a88d3c61431b312578e57063343958_re_1674143258383](https://user-images.githubusercontent.com/105347300/214511940-f77965ad-88ea-4ff1-ad39-6c64c4e6d71c.png)
@@ -96,7 +97,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 #### - :boom: 25000epochs 훈련에 걸린 시간
 #### - :boom: 2023/01/17 약 16시 ~  2023/01/19 02시 약 34 시간 19분 소요 ==> tensorboard 1.43day 소요
 ![cfed34d191623197d165aac2e594f85e8fcfe114](https://user-images.githubusercontent.com/105347300/214512276-ec1fffaa-0bdd-484b-bcc4-df30f682423c.png)
-
+----------------------------------------------------------------
 ## :loudspeaker:모델 평가
 - 기본적으로 교육 프로세스는 교육 성과의 몇 가지 기본 측정값을 기록
 - 과정 :모델 학습 중 체크포인트 파일 세트가 생성되면 평가 프로세스는 이러한 파일을 사용하고 모델이 테스트 데이터 세트에서 개체를 얼마나 잘 감지하는지 평가
