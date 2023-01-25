@@ -97,6 +97,53 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - :boom: 2023/01/17 약 16시 ~  2023/01/19 02시 약 34 시간 19분 소요 ==> tensorboard 1.43day 소요
 ![cfed34d191623197d165aac2e594f85e8fcfe114](https://user-images.githubusercontent.com/105347300/214512276-ec1fffaa-0bdd-484b-bcc4-df30f682423c.png)
 
+## :loudspeaker:모델 평가
+- 기본적으로 교육 프로세스는 교육 성과의 몇 가지 기본 측정값을 기록
+- 과정 :모델 학습 중 체크포인트 파일 세트가 생성되면 평가 프로세스는 이러한 파일을 사용하고 모델이 테스트 데이터 세트에서 개체를 얼마나 잘 감지하는지 평가
+- ==> 이 평가의 결과는 시간이 지남에 따라 검사할 수 있는 몇 가지 메트릭 형식으로 요약됨
+
+#### 평가 완료
+![fde66980e89fca3f9a14a0849a0f7ccbcbfcc878_re_1674143258385](https://user-images.githubusercontent.com/105347300/214512874-caf8b167-bfe2-40ad-b84b-7129b70e796e.png)
+
+#### 평가 해석
+![7d8dabacd6d775fd74d721e897f6bfaab23084be_re_1674143258385](https://user-images.githubusercontent.com/105347300/214512975-6e838854-d94a-4118-b066-6ae940a58824.png)
+- Precision (정밀도) :Precision은 모든 검출 결과 중 옳게 검출한 비율
+- Recall (재현율) :Recall은 마땅히 검출해내야 하는 물체들 중에서 제대로 검출된 비율
+
+- Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.677
+- => 0.5 와 0.95사이의 IoU(교집합에 대한 교집합) 임계값에 대한 평균 정밀도 및 평균 재현율이며 계산되는 최대 감지 수는 100임.또한 다양한 영역(전체, 소형, 중형 및 대형)에 대한 평균 정밀도(AP) 및 AR을 계산했습니다.
+
+![f994f8fe501db754bd0843e150aee4f86309e555_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513073-c04d80bb-9772-43e3-a3be-b72893f6d2df.png)
+
+IoU = 교집합 영역 넓이 / 합집합 영역 넓이
+'DetectionBoxes_Precision/mAP': .05 단위로 .5에서 .95 범위의 IOU 임계값에 대해 평균화된 클래스에 대한 평균 정밀도를 의미합니다.
+'DetectionBoxes_Precision/mAP@.50IOU': 50% IOU에서 평균 평균 정밀도
+'DetectionBoxes_Precision/mAP@.75IOU': 75% IOU에서 평균 평균 정밀도
+'DetectionBoxes_Precision/mAP (소형)': 작은 물체에 대한 평균 정밀도를 의미합니다(면적 < 32^2 픽셀).
+'DetectionBoxes_Precision/mAP (medium)': 중간 크기 개체의 평균 정밀도를 의미합니다(32^2 픽셀 < 영역 < 96^2 픽셀).
+'DetectionBoxes_Precision/mAP (대형)': 큰 개체에 대한 평균 정밀도를 의미합니다(96^2 픽셀 < 영역 < 10000^2 픽셀).
+'DetectionBoxes_Recall/AR@1': 1회 감지된 평균 회수.
+'DetectionBoxes_Recall/AR@10': 10회 감지된 평균 회수.
+'DetectionBoxes_Recall/AR@100': 100개 감지의 평균 회수.
+'DetectionBoxes_Recall/AR@100 (소형)': 작은 물체에 대한 평균 회수율이 100입니다.
+'DetectionBoxes_Recall/AR@100 (medium)': 100인 중간 물체에 대한 평균 회수.
+'DetectionBoxes_Recall/AR@100 (large)': 100회 감지된 큰 물체에 대한 평균 회수.
+
+![20bd5ee03d96f8d0b3a70f6b4fb77200055f1700_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513648-7c9868b7-b13c-47a0-90ed-c3e5502e84d2.png)
+- classification_loss (분류 손실):감지된 객체를 다양한 클래스로 분류하기 위한 손실(클래스를 얼마나 잘 예측했는지에 대한 loss)
+- localization_loss:바운딩 박스를 얼마나 잘 예측했는지에 대한 손실(지역화 손실 또는 경계 상자 회귀자의 손실)
+- regularization_loss(정규화 손실) :  정규화 손실은 신경망 의 가중치 에서 계산된 L2 손실과 같음. 이 손실을 최소화하면 가중치 값이 축소되는 경향이 있습니다. 과적합과 같은 문제를 해결하는 데 도움이 될 수 있는 정규화기술
+- learning_rate: 학습률
+
+##### Resolved during evaluation  :v:
+![f3aefbabb5bd36364b57b56dd2e54fd9181ba7dd_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513742-67393059-4f35-4cf9-a4e5-141396f42d41.png)
+- =>해결 : test.record파일 생성
+
+
+![25a72fdffb0cef87c7815ea1b6993abf3b00c5a5_re_1673935912240](https://user-images.githubusercontent.com/105347300/214513813-bce2161c-0a83-4f84-851f-bb76bdb36c08.png)
+InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 수 없습니다. #2961
+
+- ==> 해결 : 파일 수정
 
 
 
