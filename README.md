@@ -101,10 +101,10 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - 기본적으로 교육 프로세스는 교육 성과의 몇 가지 기본 측정값을 기록
 - 과정 :모델 학습 중 체크포인트 파일 세트가 생성되면 평가 프로세스는 이러한 파일을 사용하고 모델이 테스트 데이터 세트에서 개체를 얼마나 잘 감지하는지 평가
 - ==> 이 평가의 결과는 시간이 지남에 따라 검사할 수 있는 몇 가지 메트릭 형식으로 요약됨
-
+----------------------------------------------------------------
 #### 평가 완료
 ![fde66980e89fca3f9a14a0849a0f7ccbcbfcc878_re_1674143258385](https://user-images.githubusercontent.com/105347300/214512874-caf8b167-bfe2-40ad-b84b-7129b70e796e.png)
-
+----------------------------------------------------------------
 #### 평가 해석
 ![7d8dabacd6d775fd74d721e897f6bfaab23084be_re_1674143258385](https://user-images.githubusercontent.com/105347300/214512975-6e838854-d94a-4118-b066-6ae940a58824.png)
 - Precision (정밀도) :Precision은 모든 검출 결과 중 옳게 검출한 비율
@@ -134,7 +134,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - localization_loss:바운딩 박스를 얼마나 잘 예측했는지에 대한 손실(지역화 손실 또는 경계 상자 회귀자의 손실)
 - regularization_loss(정규화 손실) :  정규화 손실은 신경망 의 가중치 에서 계산된 L2 손실과 같음. 이 손실을 최소화하면 가중치 값이 축소되는 경향이 있습니다. 과적합과 같은 문제를 해결하는 데 도움이 될 수 있는 정규화기술
 - learning_rate: 학습률
-
+----------------------------------------------------------------
 ##### Resolved during evaluation  :v:
 ![f3aefbabb5bd36364b57b56dd2e54fd9181ba7dd_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513742-67393059-4f35-4cf9-a4e5-141396f42d41.png)
 - =>해결 : test.record파일 생성
@@ -153,5 +153,60 @@ InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 �
 
 ## :loudspeaker: Object Detection From TF2 Saved Model(TF2 저장된 모델에서 개체 감지) :boom:
 
+- epochs당 다른 loss값을 가진 저장된 모델들을 같은 조건에서 비교해보며 공부
 
+### :bulb: 모델 비교 (epochs =25000인 모델) 
+- 10개의 테스트 이미지 사용
+- 위에서 훈련한 모델 사용
+- epochs =25000
+- 가장 성능이 좋은 모델임
 
+![73807c832a82f390d06462f9f68486f11ae2f9c6_re_1674143258386](https://user-images.githubusercontent.com/105347300/214515550-8aefc88c-9790-4c32-9902-f08143f864e0.png)
+
+![7bdfe0a10dd2d5af57a75d6432d0da8ed54373e7_re_1674143258386](https://user-images.githubusercontent.com/105347300/214515553-3d2d3f91-08f6-445e-bec0-d131a18b17d5.png)
+
+#### :boom: ==>같은 조건에서 100개의 숫자중 4개 틀림 == > 검출률 96%
+
+----------------------------------------------------------------------------------
+### :bulb: 모델 비교 (epochs =2500인 모델) 
+- 아래 그래프에서 손실이 높아지기 전의 2500epoch모델임
+![3ed8dff84d20d506024939a7a06502eb96e940d3](https://user-images.githubusercontent.com/105347300/214515879-9ae65a7e-275a-4699-990a-004c8ad58a67.png)
+
+- ==>모델파일에서 시간에따른 ckpt-num를 삭제하고 cketpoint파일을 수정한 뒤 원하는 시간대까지 저장된 모델을 내보내면 됨.
+![9a2ce67d5fc889c0396a1f278df85bc0a2176194_re_1674121259216](https://user-images.githubusercontent.com/105347300/214515887-bfefe66d-02b8-440c-84e1-e81744bd882c.png)
+
+- 검출 결과
+![08e47c3daf3a95c20da757ac75bc59b70f9d4c3d_re_1674143258386](https://user-images.githubusercontent.com/105347300/214515966-709676d1-a5e3-4bdf-9826-8bf4fb5ad186.png)
+
+#### :boom: ==>같은 조건에서 100개의 숫자중 13개 틀림 & 검출하지 못함 == > 검출률 87%
+-------------------------------------------------------------------------------------
+### :bulb: 모델 비교 (epochs =3300인 모델) 
+- 훈련 중 특히 오차가 높아졌을때의 모델
+
+![7bdc52ec04219fb4ab4358753471e4035c441bdf](https://user-images.githubusercontent.com/105347300/214516172-74f4b343-bcb8-4fbe-8982-7e9199783182.png)
+- 오차가 증가했지만 25000epoch에서 봤을때 일반적인 현상 이었음.
+
+![ad298f4dcc64fd1600b8efc0049abcdc885bfe22_re_1674143258386](https://user-images.githubusercontent.com/105347300/214516263-bd6eaf90-bfe5-42ff-abc3-2f2e247889f3.png)
+
+#### :boom: ==>같은 조건에서 100개의 숫자중 100개 틀림 & 검출하지 못함 == > 검출률 0%
+
+- ==>이유
+![2a6e47014146807e044a48cdc531057a9c16a028_re_1674143258386](https://user-images.githubusercontent.com/105347300/214516355-37ee9c33-fcef-4d8a-bc60-eafecc3f2718.png)
+- 객체의 정확도가 30%를 넘지 못함
+- ==>조건에서 50%이상 확률을 가지는 객체만 그리도록 설정했기 때문에 그려지지 않았음.
+
+--------------------------------------------------------------------------------------------------
+### :bulb: epochs당 다른 loss값을 가진 저장된 모델들을 같은 조건에서 비교 결과
+
+- 25000epochs 의 가장 작은 loss값을 가진 모델의 성능이 확실히 좋음. 
+- 그러나 시간이 많이 걸린 단점  약 34 시간 19분 소요 ==> tensorboard 1.43day 소요
+- 배경이 없는 객체들만 학습 시키다보니 배경이 있으면 확실히 인식을 못함
+
+---------------------------------------------------------------------------------------------------
+###  :grey_question: 검출된 객체의 id와 확률 표시 중 문제점
+
+![5f1ab1d2721a32d666801f8a9915bca1f39be40a_re_1674143258386](https://user-images.githubusercontent.com/105347300/214516696-f7e09562-8a0c-4f18-82ae-0fa8204c69b1.png)
+![5a1d29a95993b45a0331e7418ebe232e698e4071_re_1674143258386](https://user-images.githubusercontent.com/105347300/214516706-65b2ebf2-a699-48ec-88d8-7b9ef6bb51b2.png)
+- ==>한 객체의 바운딩 박스가 겹쳤을때(파란 선으로 그은 두 바운딩 박스 좌표 같음) 더 높은 확률의 숫자가 랜덤으로 안보이는 경향이 있음
+- ==>출력 글자를 확인해야하는 번거로움 발생
+- 해결 못함
