@@ -1,5 +1,4 @@
-# Digit Detection :zero:~:nine: :computer:
-## using the TensorFlow2 object detection api 
+# Digit Detection :zero:~:nine: :computer: ### using the TensorFlow2 object detection api 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
 
 # :pushpin:Project Description
