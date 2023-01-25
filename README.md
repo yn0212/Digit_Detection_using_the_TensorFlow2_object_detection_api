@@ -93,8 +93,8 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - regularization_loss(정규화 손실) :  정규화 손실은 신경망 의 가중치 에서 계산된 L2 손실과 같음. 이 손실을 최소화하면 가중치 값이 축소되는 경향이 있음. 과적합과 같은 문제를 해결하는 데 도움이 될 수 있는 정규화기술
 - learning_rate: 학습률
 
-- :boom: 25000epochs 훈련에 걸린 시간
-- :boom: 2023/01/17 약 16시 ~  2023/01/19 02시 약 34 시간 19분 소요 ==> tensorboard 1.43day 소요
+#### - :boom: 25000epochs 훈련에 걸린 시간
+#### - :boom: 2023/01/17 약 16시 ~  2023/01/19 02시 약 34 시간 19분 소요 ==> tensorboard 1.43day 소요
 ![cfed34d191623197d165aac2e594f85e8fcfe114](https://user-images.githubusercontent.com/105347300/214512276-ec1fffaa-0bdd-484b-bcc4-df30f682423c.png)
 
 ## :loudspeaker:모델 평가
@@ -115,19 +115,19 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 
 ![f994f8fe501db754bd0843e150aee4f86309e555_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513073-c04d80bb-9772-43e3-a3be-b72893f6d2df.png)
 
-IoU = 교집합 영역 넓이 / 합집합 영역 넓이
-'DetectionBoxes_Precision/mAP': .05 단위로 .5에서 .95 범위의 IOU 임계값에 대해 평균화된 클래스에 대한 평균 정밀도를 의미합니다.
-'DetectionBoxes_Precision/mAP@.50IOU': 50% IOU에서 평균 평균 정밀도
-'DetectionBoxes_Precision/mAP@.75IOU': 75% IOU에서 평균 평균 정밀도
-'DetectionBoxes_Precision/mAP (소형)': 작은 물체에 대한 평균 정밀도를 의미합니다(면적 < 32^2 픽셀).
-'DetectionBoxes_Precision/mAP (medium)': 중간 크기 개체의 평균 정밀도를 의미합니다(32^2 픽셀 < 영역 < 96^2 픽셀).
-'DetectionBoxes_Precision/mAP (대형)': 큰 개체에 대한 평균 정밀도를 의미합니다(96^2 픽셀 < 영역 < 10000^2 픽셀).
-'DetectionBoxes_Recall/AR@1': 1회 감지된 평균 회수.
-'DetectionBoxes_Recall/AR@10': 10회 감지된 평균 회수.
-'DetectionBoxes_Recall/AR@100': 100개 감지의 평균 회수.
-'DetectionBoxes_Recall/AR@100 (소형)': 작은 물체에 대한 평균 회수율이 100입니다.
-'DetectionBoxes_Recall/AR@100 (medium)': 100인 중간 물체에 대한 평균 회수.
-'DetectionBoxes_Recall/AR@100 (large)': 100회 감지된 큰 물체에 대한 평균 회수.
+- IoU = 교집합 영역 넓이 / 합집합 영역 넓이
+- 'DetectionBoxes_Precision/mAP': .05 단위로 .5에서 .95 범위의 IOU 임계값에 대해 평균화된 클래스에 대한 평균 정밀도를 의미합니다.
+- 'DetectionBoxes_Precision/mAP@.50IOU': 50% IOU에서 평균 평균 정밀도
+- 'DetectionBoxes_Precision/mAP@.75IOU': 75% IOU에서 평균 평균 정밀도
+- 'DetectionBoxes_Precision/mAP (소형)': 작은 물체에 대한 평균 정밀도를 의미합니다(면적 < 32^2 픽셀).
+- 'DetectionBoxes_Precision/mAP (medium)': 중간 크기 개체의 평균 정밀도를 의미합니다(32^2 픽셀 < 영역 < 96^2 픽셀).
+- 'DetectionBoxes_Precision/mAP (대형)': 큰 개체에 대한 평균 정밀도를 의미합니다(96^2 픽셀 < 영역 < 10000^2 픽셀).
+- 'DetectionBoxes_Recall/AR@1': 1회 감지된 평균 회수.
+- 'DetectionBoxes_Recall/AR@10': 10회 감지된 평균 회수.
+- 'DetectionBoxes_Recall/AR@100': 100개 감지의 평균 회수.
+- 'DetectionBoxes_Recall/AR@100 (소형)': 작은 물체에 대한 평균 회수율이 100입니다.
+- 'DetectionBoxes_Recall/AR@100 (medium)': 100인 중간 물체에 대한 평균 회수.
+- 'DetectionBoxes_Recall/AR@100 (large)': 100회 감지된 큰 물체에 대한 평균 회수.
 
 ![20bd5ee03d96f8d0b3a70f6b4fb77200055f1700_re_1674143258385](https://user-images.githubusercontent.com/105347300/214513648-7c9868b7-b13c-47a0-90ed-c3e5502e84d2.png)
 - classification_loss (분류 손실):감지된 객체를 다양한 클래스로 분류하기 위한 손실(클래스를 얼마나 잘 예측했는지에 대한 loss)
@@ -142,10 +142,16 @@ IoU = 교집합 영역 넓이 / 합집합 영역 넓이
 
 ![25a72fdffb0cef87c7815ea1b6993abf3b00c5a5_re_1673935912240](https://user-images.githubusercontent.com/105347300/214513813-bce2161c-0a83-4f84-851f-bb76bdb36c08.png)
 InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 수 없습니다. #2961
-
 - ==> 해결 : 파일 수정
 
 
+## :loudspeaker:모델 내보내기
+-아나콘다 터미널
+- python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\my_ssd_resnet50_v1_fpn\pipeline.config --trained_checkpoint_dir .\models\my_ssd_resnet50_v1_fpn\ --output_directory .\exported-models\my_model
+
+![6df90c00670a10a34394437b6e46f94ffe785cd1_re_1674143258385](https://user-images.githubusercontent.com/105347300/214514161-bb753c6e-6cf5-4b1e-9a5e-9b50499c0156.png)
+
+## :loudspeaker: Object Detection From TF2 Saved Model(TF2 저장된 모델에서 개체 감지) :boom:
 
 
 
