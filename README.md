@@ -40,12 +40,12 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - 1단계 : 분류와 위치검출을 동시에 행하는 방법 =>객체인식 비교적 빠름, 정확도 낮음(yolo,ssd)
 - 2단계 : 분류와 위치검출 순차적으로 행하는 방법 =>객체인식 비교적 느림, 정확도 높음(r-cnn계열)
 
-## :loudspeaker: 데이터세트에 주석 달기 
+### :loudspeaker: 데이터세트에 주석 달기 
 - LabelImg  사용
 ![76d36c161bc6bfbed6b5216a47a0160afd69ad0c_re_1674143258383](https://user-images.githubusercontent.com/105347300/214510142-cd76c0b2-36d6-487b-816b-2f6cb15cdf91.png)
 - 0~9 까지의 훈련 데이터 객체에 주석을 달아 xml파일 생성
 
-## :loudspeaker: Create Label Map (레이블 맵 생성)
+### :loudspeaker: Create Label Map (레이블 맵 생성)
 - TensorFlow에는 사용된 각 레이블을 정수 값에 매핑하는 레이블 맵이 필요함.
 - label_map.pbtxt파일 사용
 ![889fb11ec81fa699e1f749f4b5989b3ba926ee55_re_1674143258384](https://user-images.githubusercontent.com/105347300/214510342-9c46f47b-59a7-4c59-a26c-9ed3c9679318.png)
@@ -53,7 +53,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - 0~9 까지 id매칭
 ![edab9ba1d45e19d811502a773e142d77f7339b6e_re_1674143258383](https://user-images.githubusercontent.com/105347300/214510426-c3bf5d05-b577-4b49-ad2e-0250734f5f47.png)
 
-## :loudspeaker: TensorFlow 레코드 만들기
+### :loudspeaker: TensorFlow 레코드 만들기
 - 주석을 TFRecord형식으로 변환
 - 폴더 의 모든 *.xml파일 을 반복 하고 두 파일 각각에 대한 파일을 생성하는 간단한 스크립트 사용
 - 업로드된 generate_tfrecord.py사용
