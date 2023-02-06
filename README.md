@@ -2,8 +2,12 @@
 ### using the TensorFlow2 object detection api 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
 
+
+
 # :pushpin:Project Description
 Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기체 이미지를 95% 확률로 검출을 수행하는 프로그램이다.
+
+
 
 # :pushpin:Project Purpose
 - 전이학습된 모델 SSD ResNet50 V1 FPN 640x640을 숫자 검출을 위한 모델로 훈련시켜 숫자 검출률 95%이상 높이기
@@ -244,6 +248,7 @@ InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 �
 - =>모델을 가져와 데이터를 입력하면(학습한 데이터의 형식이 tensor이므로 입력 형식을 tensor로 바꾸어줌) 추론한 값을 반환함.
 
 -----------------------------------------------------------------------------------------------------
+
 ### :bulb: 2)반환된 detections 의 값 출력
 - ==>'raw_detection_boxes' ,num_detections , 'raw_detection_scores' ,'detection_anchor_indices' , 'detection_boxes' ,'detection_scores' ,'detection_multiclass_scores' 의 정보를 확인 할 수 있음.
 
@@ -255,13 +260,16 @@ InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 �
 ![c6f8b4485cc209b05c1953a62c2441b9d60ceb99](https://user-images.githubusercontent.com/105347300/214518008-7d9110cc-1a66-4e32-9370-11803bbfaf32.png)
 
 ----------------------------------------------------------------------------------------------
+
 ### :bulb: 3)반환된 추론값의 딕셔너리 key 설명
 
 ![ef233e76211fe390c5b04cbf7b4f8032d429b5d9](https://user-images.githubusercontent.com/105347300/214518102-aa91a502-b727-4fe3-87f4-92b0598646ce.png)
 - ==>이미지 추론 정보 출력 가능
+
 ![4ceab178f3ce2b3701a1caa1ce7fe6a9a80ddd10_re_1674143258387](https://user-images.githubusercontent.com/105347300/214518153-97737792-9ad7-480d-b626-780f8824d3d4.png)
 
 ![e8026ffe0173a86184aec695f6f94d8c8a29b277](https://user-images.githubusercontent.com/105347300/214518174-2f1ea17e-10ea-4e9d-b947-4fbae4f5004f.png)
+
 
 -----------------------------------------------------------------------------------------
 ### :bulb: 4)검출 결과를 원본 영상에 그리기 (함수 이용)
