@@ -23,6 +23,7 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 
 # :pushpin:Project Results
 - 필기체 인식률 : 96%
+- 컬러 , 흑백 모두 인식 가능
 ![7bdfe0a10dd2d5af57a75d6432d0da8ed54373e7_re_1674143258386](https://user-images.githubusercontent.com/105347300/214508661-f1239640-a307-4654-96f6-ad8dc645749a.png)
 - 100개의 숫자중 4개 틀림
 - epochs =25000
