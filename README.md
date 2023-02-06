@@ -3,7 +3,7 @@
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
 
 # :pushpin:Project Description
-Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기체 이미지를 95% 확률로 검출을 수행하는 프로그램이다.
+## Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기체 이미지를 95% 확률로 검출을 수행하는 프로그램이다.
 
 # :pushpin:Project Purpose
 - 전이학습된 모델 SSD ResNet50 V1 FPN 640x640을 숫자 검출을 위한 모델로 훈련시켜 숫자 검출률 95%이상 높이기
@@ -15,8 +15,8 @@ Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기�
 - 객체 클래스 수 : 0~9 총 10개
 
 # :pushpin:Project Results
-- 필기체 인식률 : 96%
-- 컬러 , 흑백 모두 인식 가능
+## - 필기체 인식률 : 96%
+## - 컬러 , 흑백 모두 인식 가능
 ![7bdfe0a10dd2d5af57a75d6432d0da8ed54373e7_re_1674143258386](https://user-images.githubusercontent.com/105347300/214508661-f1239640-a307-4654-96f6-ad8dc645749a.png)
 - 100개의 숫자중 4개 틀림
 - epochs =25000
