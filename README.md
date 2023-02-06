@@ -31,7 +31,7 @@
 - Resolving errors during installation : pip install --upgrade protobuf==3.20.0 로 변경
 
 # :pushpin:Project Process (Training Custom Object Detector)
-#### :dizzy: 객체 인식 정의
+### :dizzy: 객체 인식 정의
 - 객체 인식 :  이미지나 영상 내에 있는 객체를 식별하는 컴퓨터 비전 기술
 - 객체 인식 = 여러가지 객체에 대한 분류 + 객체의 위치 정보를 파악하는 위치 검출
 - 딥러닝을 이용한 객체 인식 알고리즘은 1단계 객체 인식과 2단계 객체 인식으로 나눌 수 있음.
