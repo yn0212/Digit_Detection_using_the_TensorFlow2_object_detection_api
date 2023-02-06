@@ -366,5 +366,4 @@ InvalidArgumentError: TypeError: 'numpy.float64' 개체를 정수로 해석할 �
 ==> 조기 중지 기술을 사용하여 모델이 교육 데이터에 있는 패턴과 노이즈를 기억하지 않도록 하고,  대신 훈련 데이터를 일반화하는 방향으로 추진
 
  
-
-
+###### reference site : https://heartbeat.comet.ml/deep-learning-best-practices-regularization-techniques-for-better-performance-of-neural-network-94f978a4e518
