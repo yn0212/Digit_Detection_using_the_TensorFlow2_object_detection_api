@@ -2,20 +2,13 @@
 ### using the TensorFlow2 object detection api 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
 
-
-
 # :pushpin:Project Description
 Anaconda 환경에서 TensorFlow 2 Object Detection API 를 사용하여 필기체 이미지를 95% 확률로 검출을 수행하는 프로그램이다.
-
-
 
 # :pushpin:Project Purpose
 - 전이학습된 모델 SSD ResNet50 V1 FPN 640x640을 숫자 검출을 위한 모델로 훈련시켜 숫자 검출률 95%이상 높이기
 - tensorflow2 object detection api를 응용하여 숫자 검출 과제에 맞게 수정하여 사용해보기 위함
 - epoch별 모델 성능을 비교해보고 모델 평가를 분석해보며 공부한 내용 복습
-
-# :pushpin:Device used for the project
-- 학습에 사용한 GPU : GTX1660 Supper
 
 # :pushpin:Project Dataset
 - 사용한 데이터셋 :  google 이미지 다운 (train데이터 : 0~9 xml파일 약 18개 , 예측 데이터 : 10개)
