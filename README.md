@@ -1,4 +1,4 @@
-# Digit Detection :zero:~:nine: :computer: 
+# Digit Object Detection :zero:~:nine: :computer: 
 ### Digit object detection using SSD ResNet50 V1 FPN 640x640 
 ### referenced the Tensorflow Object Detection Api
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
