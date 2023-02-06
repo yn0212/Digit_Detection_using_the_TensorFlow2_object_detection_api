@@ -1,5 +1,6 @@
 # Digit Detection :zero:~:nine: :computer: 
-### using the TensorFlow2 object detection api 
+### Digit object detection using SSD ResNet50 V1 FPN 640x640 
+### referenced the Tensorflow Object Detection Api
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
 
 # :pushpin:Project Description
@@ -10,10 +11,10 @@
 - tensorflow2 object detection api를 응용하여 숫자 검출 과제에 맞게 수정하여 사용해보기 위함
 - epoch별 모델 성능을 비교해보고 모델 평가를 분석해보며 공부한 내용 복습
 
-# :pushpin:Project Dataset
+# :pushpin:Project Information
 - 사용한 데이터셋 :  google 이미지 다운 (train데이터 : 0~9 xml파일 약 18개 , 예측 데이터 : 10개)
 - 객체 클래스 수 : 0~9 총 10개
-
+- 사용한 모델 : SSD ResNet50 V1 FPN 640x640 
 # :pushpin:Project Results
 ## - 필기체 인식률 : 96%
 ## - 컬러 , 흑백 모두 인식 가능
